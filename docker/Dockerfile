@@ -8,7 +8,7 @@ ARG mp4boxtag="v2.2.1"
 ARG dotnetlink="https://download.visualstudio.microsoft.com/download/pr/48fbc600-8228-424e-aaed-52b7e601c277/c493b8ac4629341f1e5acc4ff515fead/dotnet-runtime-6.0.10-linux-x64.tar.gz"
 ARG pgs2srtlink="https://github.com/Tentacule/PgsToSrt/releases/download/v1.4.2/PgsToSrt-1.4.2.zip"
 ARG tesseractlink="https://github.com/tesseract-ocr/tessdata.git"
-ARG ffmpeg6link="https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz"
+ARG ffmpeg6link="https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-6.0.1-amd64-static.tar.xz"
 
 # Install MEDIAINFO MKVTOOLNIX WGET
 RUN \
@@ -37,7 +37,9 @@ RUN \
 RUN \
   printf "\n---Download ffmpeg6---\n\n" && \
   wget -O - ${ffmpeg6link} | \
-  tar -x -J -C /usr/local/bin/
+  tar -x -J -C /usr/local/bin/ && \
+  mv /usr/local/bin/ffmpeg-6.0.1-amd64-static/ffmpeg /usr/local/bin/ && \
+  mv /usr/local/bin/ffmpeg-6.0.1-amd64-static/ffprobe /usr/local/bin/
 
 # HDR10PLUS_TOOL
 RUN \
